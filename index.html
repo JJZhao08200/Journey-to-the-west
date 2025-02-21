@@ -65,19 +65,17 @@
     </script>
 
     <script>
-    async function fetchYoutubeData() {
-        const apiUrl = "https://d056-34-55-7-219.ngrok-free.app";  // ✅ 替换为你的 ngrok 网址
-
-        document.getElementById("data-output").innerText = "⏳ 正在获取数据...";
-        
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            document.getElementById("data-output").innerText = JSON.stringify(data, null, 2);
-        } catch (error) {
-            document.getElementById("data-output").innerText = "❌ 获取数据失败，请检查 API 连接";
-        }
+async function fetchData() {
+    const API_URL = "https://d056-34-55-7-219.ngrok-free.app/fetch_youtube_data";  // ✅ 替换成你的 ngrok URL
+    try {
+        let response = await fetch(API_URL);
+        let data = await response.json();
+        console.log("✅ 数据获取成功:", data);
+    } catch (error) {
+        console.error("❌ 获取数据失败:", error);
     }
+}
+
 </script>
 
 </body>
