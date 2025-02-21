@@ -1,11 +1,63 @@
-/* 团队介绍页面背景 */
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: rgb(234, 75, 67);
+    color: white;
+}
+
+/* 头部导航 */
+header {
+    background-color: rgb(200, 50, 50);
+    padding: 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+/* Dashboard 样式 */
+.dashboard-frame {
+    width: 80%;
+    height: 600px;
+    border: none;
+    margin-top: 20px;
+}
+
+/* GPT 插件 */
+.chat-container {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    width: 80%;
+    margin: auto;
+}
+
+.chat-frame {
+    width: 100%;
+    height: 400px;
+    border: none;
+}
+
+/* 团队介绍页 */
 .team-page {
-    background: url("background.jpg") no-repeat center center fixed;
+    background: url("11.JPG") no-repeat center center fixed;
     background-size: cover;
     color: white;
 }
 
-/* 团队介绍框 */
+/* 团队介绍内容 */
 .team-content {
     background: rgba(0, 0, 0, 0.6);
     padding: 50px;
@@ -25,25 +77,38 @@
     gap: 20px;
 }
 
-/* 每个成员的样式 */
+/* 统一团队成员卡片 */
 .team-photo {
     text-align: center;
     width: 180px;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* 统一照片大小 */
+/* 统一照片大小，不变形 */
 .team-photo img {
     width: 180px;
     height: 240px;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* 名字样式 */
+/* 鼠标悬浮放大效果 */
+.team-photo:hover {
+    transform: scale(1.05);
+}
+
+/* 团队成员姓名 */
 .team-photo .name {
     margin-top: 8px;
     font-size: 16px;
     font-weight: bold;
     color: white;
+}
+
+/* 页脚 */
+footer {
+    background-color: rgb(180, 40, 40);
+    padding: 10px;
+    margin-top: 30px;
 }
