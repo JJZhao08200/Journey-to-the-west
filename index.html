@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTube 数据分析 Dashboard</title>
+  <title>YouTube Data Analytics Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <!-- 引入 PapaParse 用于解析 CSV -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -30,10 +30,10 @@
 </head>
 <body>
   <header>
-    <h1>📊 YouTube 数据分析 Dashboard</h1>
+    <h1>📊 YouTube Data Analytics Dashboard</h1>
     <nav>
-      <a href="index.html">🏠 首页</a>
-      <a href="team.html">👥 团队介绍</a>
+      <a href="index.html">🏠 DASHBOARD</a>
+      <a href="team.html">👥 TEAM</a>
     </nav>
   </header>
 
@@ -44,22 +44,22 @@
     <!-- ChatGPT API 交互 -->
     <div class="chat-container">
       <h2>🤖 Chat with GPT</h2>
-      <textarea id="user-input" placeholder="输入你的问题..."></textarea>
-      <button onclick="sendMessage()">发送</button>
+      <textarea id="user-input" placeholder="Type your question..."></textarea>
+      <button onclick="sendMessage()">Sending</button>
       <div id="chat-output"></div>
     </div>
 
     <!-- YouTube 数据获取 -->
     <div class="fetch-data-container">
-      <h2>📊 获取 YouTube 热门数据</h2>
-      <button onclick="fetchYoutubeData()">获取数据</button>
+      <h2>📊 Generate a Summary of Popular Videos at this Moment</h2>
+      <button onclick="fetchYoutubeData()">Generate Data</button>
       <pre id="data-output"></pre>
     </div>
 
     <!-- CSV 表格区域（初始隐藏） -->
     <div class="csv-container">
-      <h2>📑 CSV 数据展示</h2>
-      <button id="toggleCsvBtn">显示 CSV 表格</button>
+      <h2>📑 CSV Display</h2>
+      <button id="toggleCsvBtn">Display CSV File</button>
       <table id="csvTable">
         <!-- 表头和内容将在 JavaScript 中生成 -->
       </table>
@@ -67,7 +67,7 @@
   </main>
 
   <footer>
-    <p>📅 每小时更新数据 | 由团队维护</p>
+    <p>📅 Generate Every Hour Automatically | Maintain by Team 9</p>
   </footer>
 
   <!-- ChatGPT API 交互脚本 -->
@@ -78,7 +78,7 @@
       const userInput = document.getElementById("user-input").value;
       if (!userInput) return;
 
-      document.getElementById("chat-output").innerHTML = "⏳ 正在生成回复...";
+      document.getElementById("chat-output").innerHTML = "⏳ Generating...";
       
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
@@ -107,11 +107,11 @@
         let response = await fetch(API_URL);
         let data = await response.json();
 
-        console.log("✅ 数据获取成功:", data);
+        console.log("✅ Data Generate Success:", data);
         document.getElementById("data-output").textContent = JSON.stringify(data, null, 2);
       } catch (error) {
-        console.error("❌ 获取数据失败:", error);
-        document.getElementById("data-output").textContent = "❌ 获取数据失败，请检查 API 连接";
+        console.error("❌ Data Generate Failed:", error);
+        document.getElementById("data-output").textContent = "❌ Data Generate Failed, Check API";
       }
     }
   </script>
@@ -165,10 +165,10 @@
     toggleCsvBtn.addEventListener("click", function() {
       if (csvTable.style.display === "none" || csvTable.style.display === "") {
         csvTable.style.display = "table";
-        toggleCsvBtn.textContent = "隐藏 CSV 表格";
+        toggleCsvBtn.textContent = "Display CSV File of Hot 50";
       } else {
         csvTable.style.display = "none";
-        toggleCsvBtn.textContent = "显示 CSV 表格";
+        toggleCsvBtn.textContent = "Display CSV File of Hot 50";
       }
     });
   </script>
