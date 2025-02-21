@@ -123,41 +123,5 @@
 </div>
 
 
-  
-  <script>
-  async function sendVertexMessage() {
-    const API_URL = "https://us-central1-aiplatform.googleapis.com/v1/projects/calcium-subject-450018-k8/locations/us-central1/publishers/google/models/text-bison@latest:predict";
-    const API_KEY = "AIzaSyD0vESCpWzS7AI1t4zeUT8wicXtjHt0VTU";  // 替换成你的 API Key
-    const userInput = document.getElementById("vertex-input").value;
-
-    if (!userInput) return;
-
-    document.getElementById("vertex-output").innerHTML = "⏳ Generating...";
-
-    const requestData = {
-        instances: [{ prompt: userInput }],
-        parameters: { temperature: 0.7, maxOutputTokens: 200 }
-    };
-
-    try {
-        let response = await fetch(`${API_URL}?key=${API_KEY}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(requestData)
-        });
-
-        let data = await response.json();
-        let reply = data.predictions[0].content;
-        document.getElementById("vertex-output").innerHTML = `<strong>Vertex AI:</strong> ${reply}`;
-    } catch (error) {
-        console.error("❌ Vertex AI Request Failed:", error);
-        document.getElementById("vertex-output").innerHTML = "❌ Failed to get response. Check API settings.";
-    }
-}
-  </script>
-
-
 </body>
 </html>
