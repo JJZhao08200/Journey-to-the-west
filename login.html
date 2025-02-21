@@ -20,5 +20,19 @@
     </div>
 
     <script src="script1.js"></script>
+
+    <script>
+  function login() {
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+
+      if (username && password) { 
+          localStorage.setItem("username", username); // 存储用户名
+          window.location.href = "index.html"; // ✅ 登录成功后跳转到 Dashboard
+      } else {
+          alert("Please enter both Username and Password!");
+      }
+  }
+</script>
 </body>
 </html>
