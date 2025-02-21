@@ -4,20 +4,26 @@ function login() {
 
     if (username && password) { 
         localStorage.setItem("username", username); // 存储用户名
-        alert("Password: Thank you Judge Panel"); // ✅ 无论如何都会弹出
-        window.location.href = "team.html"; // 跳转到 Team 页面
+        alert("Password: Thank you Judge Panel"); // ✅ 登录成功提示
+        window.location.href = "team.html"; // ✅ 跳转到 Team 页面
     } else {
-        alert("Please enter both username and password.");
+        alert("Please enter both username and password."); // 🚨 防止空输入
     }
 }
 
-// 在 team.html 读取用户名
+// 🚀 自动检查登录状态，未登录用户跳转到 login.html
 window.onload = function() {
+    let user = localStorage.getItem("username");
+
+    // 🚨 在 team.html 页面，检查用户是否已登录
     if (window.location.pathname.includes("team.html")) {
-        let user = localStorage.getItem("username");
-        if (user) {
+        if (!user) {
+            // ❌ 如果未登录，重定向到 login 页面
+            window.location.href = "login.html";
+        } else {
+            // ✅ 如果已登录，显示欢迎信息
             let welcomeElement = document.getElementById("userWelcome");
-            if (welcomeElement) {  // ✅ 确保元素存在
+            if (welcomeElement) {  
                 welcomeElement.textContent = "Welcome!, " + user + "!";
             }
         }
