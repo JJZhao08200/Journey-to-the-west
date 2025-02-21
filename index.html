@@ -114,5 +114,16 @@
     });
   </script>
 
+  <script>
+  window.onload = function() {
+      let user = localStorage.getItem("username");
+      if (!user) {
+          // 如果没有登录，跳转到 login.html
+          window.location.href = "login.html";
+      }
+  };
+</script>
+
+
 </body>
 </html>
