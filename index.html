@@ -16,17 +16,45 @@
     </header>
 
     <main>
-        <iframe src="YOUR_DASHBOARD_URL_HERE" class="dashboard-frame"></iframe>
+        <iframe src="https://lookerstudio.google.com/reporting/7b5b480f-a0e3-45f5-94e7-1dec99d1e329/page/JgD/edit" class="dashboard-frame"></iframe>
 
-        <!-- GPT 插件 -->
+        <!-- ChatGPT API 交互 -->
         <div class="chat-container">
             <h2>🤖 Chat with GPT</h2>
-            <iframe src="https://chat.openai.com" class="chat-frame"></iframe>
+            <textarea id="user-input" placeholder="输入你的问题..."></textarea>
+            <button onclick="sendMessage()">发送</button>
+            <div id="chat-output"></div>
         </div>
     </main>
 
     <footer>
         <p>📅 每小时更新数据 | 由团队维护</p>
     </footer>
+
+    <script>
+        const API_KEY = "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";  // 替换为你的 OpenAI API Key
+
+        async function sendMessage() {
+            const userInput = document.getElementById("user-input").value;
+            if (!userInput) return;
+
+            document.getElementById("chat-output").innerHTML = "⏳ 正在生成回复...";
+            
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: "gpt-4",  // 你也可以换成 "gpt-3.5-turbo"
+                    messages: [{ role: "user", content: userInput }]
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById("chat-output").innerHTML = `<strong>ChatGPT:</strong> ${data.choices[0].message.content}`;
+        }
+    </script>
 </body>
 </html>
