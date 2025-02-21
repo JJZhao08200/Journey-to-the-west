@@ -52,29 +52,9 @@
     <!-- YouTube 数据获取 -->
     <div class="fetch-data-container">
       <h2>📊 Generate a Summary of Popular Videos at this Moment</h2>
-      <button onclick="fetchYoutubeData()">Generate Data</button>
-      <pre id="data-output"></pre>
     </div>
 
-    <!-- CSV 表格区域（初始隐藏） -->
-    <div class="csv-container">
-      <h2>📑 CSV Display</h2>
-      <button id="toggleCsvBtn">Display CSV File</button>
-      <table id="csvTable">
-        <!-- 表头和内容将在 JavaScript 中生成 -->
-      </table>
-    </div>
-  </main>
-
-  <footer>
-    <p>📅 Generate Every Hour Automatically | Maintain by Team 9</p>
-  </footer>
-
-  <!-- ChatGPT API 交互脚本 -->
- <!-- Button to show the video -->
-<button id="toggleVideoBtn">🎬 Watch Today's Trending Video Summary</button>
-
-<!-- Video section (initially hidden) -->
+    <!-- Video section (initially hidden) -->
 <div id="videoContainer" style="display: none; margin-top: 20px;">
     <video width="80%" controls>
         <source src="trend.mp4" type="video/mp4">
@@ -96,6 +76,24 @@
         }
     });
 </script>
+
+    <!-- CSV 表格区域（初始隐藏） -->
+    <div class="csv-container">
+      <h2>📑 CSV Display</h2>
+      <button id="toggleCsvBtn">Display CSV File</button>
+      <table id="csvTable">
+        <!-- 表头和内容将在 JavaScript 中生成 -->
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <p>📅 Generate Every Hour Automatically | Maintain by Team 9</p>
+  </footer>
+
+  <!-- ChatGPT API 交互脚本 -->
+ <!-- Button to show the video -->
+<button id="toggleVideoBtn">🎬 Watch Today's Trending Video Summary</button>
 
   <!-- CSV 表格加载和显示脚本 -->
   <script>
