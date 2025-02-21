@@ -25,29 +25,41 @@ nav a {
     font-weight: bold;
 }
 
-/* Dashboard 样式 */
-.dashboard-frame {
-    width: 80%;
-    height: 600px;
-    border: none;
-    margin-top: 20px;
-}
-
-/* GPT 插件 */
-.chat-container {
-    margin-top: 30px;
-    background: white;
+/* 登录界面样式 */
+.login-box {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.85);
     padding: 20px;
+    margin: 100px auto;
     border-radius: 10px;
-    color: black;
-    width: 80%;
-    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.chat-frame {
+.login-box h2 {
+    color: black;
+}
+
+.login-box input {
     width: 100%;
-    height: 400px;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(200, 50, 50);
+    color: white;
     border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: rgb(180, 40, 40);
 }
 
 /* 团队介绍页 */
