@@ -2,20 +2,24 @@ function login() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    if (username && password) { // 只检查是否输入，不验证正确性
+    if (username && password) { 
         localStorage.setItem("username", username); // 存储用户名
-        window.location.href = "dashboard.html"; // 跳转到 Dashboard 页面
+        alert("Password: Thank you Judge Panel"); // ✅ 无论如何都会弹出
+        window.location.href = "team.html"; // 跳转到 Team 页面
     } else {
-        alert("Password: Thank you Judge Panel");
+        alert("Please enter both username and password.");
     }
 }
 
-// 在 dashboard.html 读取用户名
+// 在 team.html 读取用户名
 window.onload = function() {
-    if (window.location.pathname.includes("dashboard.html")) {
+    if (window.location.pathname.includes("team.html")) {
         let user = localStorage.getItem("username");
         if (user) {
-            document.getElementById("userWelcome").textContent = "Welcome!, " + user + "!";
+            let welcomeElement = document.getElementById("userWelcome");
+            if (welcomeElement) {  // ✅ 确保元素存在
+                welcomeElement.textContent = "Welcome!, " + user + "!";
+            }
         }
     }
 };
