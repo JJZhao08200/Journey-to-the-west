@@ -7,27 +7,8 @@
   <link rel="stylesheet" href="style.css">
   <!-- 引入 PapaParse 用于解析 CSV -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-  <style>
-    /* CSV 表格样式 */
-    #csvTable {
-      display: none;
-      border-collapse: collapse;
-      width: 80%;
-      margin: 20px auto;
-    }
-    #csvTable th, #csvTable td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-    #toggleCsvBtn {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 16px;
-    }
-  </style>
 </head>
+
 <body>
   <header>
     <h1>📊 YouTube Data Analytics Dashboard</h1>
@@ -39,50 +20,30 @@
 
   <main>
     <!-- Looker Studio 报告 -->
-    <iframe width="50%" height="900" src="https://lookerstudio.google.com/embed/reporting/7b5b480f-a0e3-45f5-94e7-1dec99d1e329/page/JgD" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+    <iframe width="50%" height="900" src="https://lookerstudio.google.com/embed/reporting/7b5b480f-a0e3-45f5-94e7-1dec99d1e329/page/JgD" frameborder="0" style="border:0" allowfullscreen></iframe>
 
-    <!-- ChatGPT API 交互 -->
-    <div class="chat-container">
-      <h2>🤖 Chat with GPT</h2>
-      <textarea id="user-input" placeholder="Type your question..."></textarea>
-      <button onclick="sendMessage()">Sending</button>
-      <div id="chat-output"></div>
-    </div>
-
-    <!-- YouTube 数据获取 -->
+    <!-- 📊 Generate YouTube Data -->
     <div class="fetch-data-container">
       <h2>📊 Generate a Summary of Popular Videos at this Moment</h2>
     </div>
 
-    <!-- Video section (initially hidden) -->
-<div id="videoContainer" style="display: none; margin-top: 20px;">
-    <video width="80%" controls>
-        <source src="trend.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
+    <!-- 🎬 Video Section -->
+    <div class="video-section">
+      <button id="toggleVideoBtn">🎬 Watch Today's Trending Video Summary</button>
+      <div id="videoContainer" style="display: none; margin-top: 20px;">
+        <video width="80%" controls>
+          <source src="trend.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
 
-<!-- JavaScript to toggle the video -->
-<script>
-    document.getElementById("toggleVideoBtn").addEventListener("click", function() {
-        let videoContainer = document.getElementById("videoContainer");
-        
-        if (videoContainer.style.display === "none") {
-            videoContainer.style.display = "block"; // Show video
-            this.textContent = "🎬 Hide Video";
-        } else {
-            videoContainer.style.display = "none"; // Hide video
-            this.textContent = "🎬 Watch Today's Trending Video Summary";
-        }
-    });
-</script>
-
-    <!-- CSV 表格区域（初始隐藏） -->
+    <!-- 📑 CSV Display -->
     <div class="csv-container">
       <h2>📑 CSV Display</h2>
       <button id="toggleCsvBtn">Display CSV File</button>
-      <table id="csvTable">
-        <!-- 表头和内容将在 JavaScript 中生成 -->
+      <table id="csvTable" style="display: none;">
+        <!-- CSV Content will be loaded here -->
       </table>
     </div>
   </main>
@@ -91,22 +52,29 @@
     <p>📅 Generate Every Hour Automatically | Maintain by Team 9</p>
   </footer>
 
-  <!-- ChatGPT API 交互脚本 -->
- <!-- Button to show the video -->
-<button id="toggleVideoBtn">🎬 Watch Today's Trending Video Summary</button>
-
-  <!-- CSV 表格加载和显示脚本 -->
+  <!-- 🎬 Video Toggle Script -->
   <script>
-    // 当页面加载时，通过 PapaParse 加载 CSV 文件
+    document.getElementById("toggleVideoBtn").addEventListener("click", function() {
+      let videoContainer = document.getElementById("videoContainer");
+      if (videoContainer.style.display === "none") {
+        videoContainer.style.display = "block";
+        this.textContent = "🎬 Hide Video";
+      } else {
+        videoContainer.style.display = "none";
+        this.textContent = "🎬 Watch Today's Trending Video Summary";
+      }
+    });
+  </script>
+
+  <!-- 📑 CSV Load & Toggle Script -->
+  <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // 使用 fetch 加载 CSV 文件，确保 data.csv 在同一目录下
       fetch("data.csv")
         .then(response => response.text())
         .then(csvText => {
           const parsed = Papa.parse(csvText, { header: true });
           const table = document.getElementById("csvTable");
 
-          // 生成表头
           if (parsed.meta.fields) {
             const thead = document.createElement("thead");
             const headerRow = document.createElement("tr");
@@ -119,7 +87,6 @@
             table.appendChild(thead);
           }
 
-          // 生成表体
           const tbody = document.createElement("tbody");
           parsed.data.forEach(row => {
             const tr = document.createElement("tr");
@@ -132,27 +99,20 @@
           });
           table.appendChild(tbody);
         })
-        .catch(error => {
-          console.error("CSV 加载失败：", error);
-        });
+        .catch(error => console.error("CSV Load Failed:", error));
     });
 
-    // 控制 CSV 表格显示/隐藏的按钮
-    const toggleCsvBtn = document.getElementById("toggleCsvBtn");
-    const csvTable = document.getElementById("csvTable");
-
-    toggleCsvBtn.addEventListener("click", function() {
-      if (csvTable.style.display === "none" || csvTable.style.display === "") {
+    document.getElementById("toggleCsvBtn").addEventListener("click", function() {
+      let csvTable = document.getElementById("csvTable");
+      if (csvTable.style.display === "none") {
         csvTable.style.display = "table";
-        toggleCsvBtn.textContent = "Display CSV File of Hot 50";
+        this.textContent = "Hide CSV File";
       } else {
         csvTable.style.display = "none";
-        toggleCsvBtn.textContent = "Display CSV File of Hot 50";
+        this.textContent = "Display CSV File";
       }
     });
   </script>
-
- 
 
 </body>
 </html>
